@@ -528,6 +528,12 @@ vim.api.nvim_set_keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", {noremap = true});
 vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", {noremap = true});
 vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", {noremap = true});
 
+-- Moving to the begining or end of line in INSERT mode
+vim.api.nvim_set_keymap("i", "<A-l>", "<Esc>A", {noremap = true});
+vim.api.nvim_set_keymap("i", "<A-h>", "<Esc>^i", {noremap = true});
+vim.api.nvim_set_keymap("n", "<A-l>", "$", {noremap = true});
+vim.api.nvim_set_keymap("n", "<A-h>", "^", {noremap = true});
+
 -- Relative Numbers:
 vim.o.relativenumber = true
 -- Toggling Relative Numbers:
