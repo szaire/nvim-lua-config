@@ -534,6 +534,10 @@ vim.api.nvim_set_keymap("i", "<A-h>", "<Esc>^i", {noremap = true});
 vim.api.nvim_set_keymap("n", "<A-l>", "$", {noremap = true});
 vim.api.nvim_set_keymap("n", "<A-h>", "^", {noremap = true});
 
+-- Adding a ";" character at the end of the line
+vim.api.nvim_set_keymap("i", "<A-;>", "<Esc>A;", {noremap = true})
+vim.api.nvim_set_keymap("n", "<A-;>", "A;", {noremap = true})
+
 -- Relative Numbers:
 vim.o.relativenumber = true
 -- Toggling Relative Numbers:
