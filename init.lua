@@ -81,8 +81,13 @@ require('lazy').setup({
     end,
   },
 
-  -- OBS: nvim-dap and nvim-dap-ui are used to debug code
-
+  -- Debugging
+  'mfussenegger/nvim-dap',
+  'leoluz/nvim-dap-go',
+  'rcarriga/nvim-dap-ui',
+  'theHamsta/nvim-dap-virtual-text',
+  'nvim-telescope/telescope-dap.nvim',
+  
   -- ==============================================================================
 
   -- Git related plugins
@@ -516,7 +521,40 @@ cmp.setup {
 -- My own keymaps
 local options = { silent = true }
 
--- jk for INSERT mode 
+-- Debugging
+-- vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>")
+-- vim.keymap.set("n", "<F10>", ":lua require'dap'.step_over()<CR>")
+-- vim.keymap.set("n", "<F11>", ":lua require'dap'.step_into()<CR>")
+-- vim.keymap.set("n", "<F12>", ":lua require'dap'.step_out()<CR>")
+-- vim.keymap.set("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
+-- vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input.('Breakpoint condition: '))<CR>")
+-- vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input.('Log point message: '))CR>")
+-- vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>")
+
+-- C++ Dap Configuration 
+-- local dap = require('dap')
+-- dap.adapters.lldb = {
+--   type = 'executable',
+--   -- absolute path is important here, otherwise the argument in the `runInTerminal` request will default to $CWD/lldb-vscode
+--   command = '/usr/bin/lldb-vscode',
+--   name = "lldb"
+-- }
+-- dap.configurations.cpp = {
+--   {
+--     name = "Launch",
+--     type = "lldb",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     cwd = '${workspaceFolder}',
+--     stopOnEntry = false,
+--     args = {},
+--     runInTerminal = true,
+--   },
+-- }
+
+-- jk an kj for INSERT mode 
 vim.keymap.set("i", "jk", "<Esc>", options)
 vim.keymap.set("i", "kj", "<Esc>", options)
 
@@ -536,7 +574,18 @@ vim.api.nvim_set_keymap("n", "<A-h>", "^", {noremap = true});
 
 -- Adding a ";" character at the end of the line
 vim.api.nvim_set_keymap("i", "<A-;>", "<Esc>A;", {noremap = true})
-vim.api.nvim_set_keymap("n", "<A-;>", "A;", {noremap = true})
+vim.api.nvim_set_keymap("n", "<A-;>", "A;<Esc>", {noremap = true})
+
+-- Carriage Return in Normal Mode
+-- NOTE: <C-m> is equivalent to <CR>
+vim.api.nvim_set_keymap("n", "<A-m>", "o<Esc>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<A-M>", "<A-O><Esc>", {noremap = true})
+
+-- Moving 5 lines faster
+vim.api.nvim_set_keymap("n", "<C-e>", "5+", {noremap = true})
+vim.api.nvim_set_keymap("n", "<C-y>", "5-", {noremap = true})
+vim.api.nvim_set_keymap("v", "<C-e>", "5+", {noremap = true})
+vim.api.nvim_set_keymap("v", "<C-y>", "5-", {noremap = true})
 
 -- Relative Numbers:
 vim.o.relativenumber = true
